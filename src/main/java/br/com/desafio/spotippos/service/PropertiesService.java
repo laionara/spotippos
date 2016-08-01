@@ -79,4 +79,15 @@ public class PropertiesService {
 		}
 		return isProperties;
 	}
+
+	public List<Property> findByPoints(Integer ax, Integer ay, Integer bx, Integer by) {
+		List<Property> propertiesWithProvince = new  ArrayList<Property>();
+		List<Property> properties = propertiesDAO.findByPoints(ax, ay, bx, by);
+		for(Property property: properties){
+			List<String> provinces = this.getOwnProvinces(property.getX(), property.getY());
+			property.setProvinces(provinces);
+			propertiesWithProvince.add(property);
+		}
+		return propertiesWithProvince;
+	}
 }

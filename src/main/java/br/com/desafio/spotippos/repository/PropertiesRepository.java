@@ -46,4 +46,13 @@ public class PropertiesRepository {
 		properties= q.getResultList();
 		return properties;
 	}
+
+	public List<Property> findByPoints(Integer ax, Integer ay, Integer bx, Integer by) {
+		Query q = manager.createQuery("SELECT p FROM " + Property.class.getName() + " p where p.x >= :ax and p.x <= :bx and p.y <= :ay and p.y >= :by");
+		q.setParameter("ax", ax);
+		q.setParameter("ay", ay);
+		q.setParameter("bx", bx);
+		q.setParameter("by", by);
+		return q.getResultList();
+	}
 }

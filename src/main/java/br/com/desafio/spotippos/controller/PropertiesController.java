@@ -1,8 +1,11 @@
 package br.com.desafio.spotippos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +51,16 @@ public class PropertiesController {
 		return this.propertiesService.findById(id);
 	}
 	
+	@RequestMapping(value = "/{ax}/{ay}/{bx}/{by}", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
+	public @ResponseBody PropertiesResponse findByPoints(@PathVariable Integer ax, @PathVariable Integer ay, @PathVariable Integer bx, @PathVariable Integer by ) {
+		PropertiesResponse propertiesResponse = new PropertiesResponse();
+		List<Property> properties = this.propertiesService.findByPoints(ax, ay, bx, by);
+		propertiesResponse.setPropertiesList(properties);
+		propertiesResponse.setTotalProperties(properties.size());
+		return propertiesResponse;
+		
+	}
+	
 	private String validateProperty(Property property){
 		if(property.getX() < 0 || property.getX() > 1400)
 			return "X value not allowed";
@@ -74,7 +87,7 @@ public class PropertiesController {
 	/**
 	 * Para preencher os properties 
 	 */
-	
+	@InitBinder
 	@RequestMapping(value = "/init", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public @ResponseBody Response init(){
 		Response response = new Response();
