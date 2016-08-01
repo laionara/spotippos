@@ -1,6 +1,7 @@
 package br.com.desafio.spotippos.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,27 +9,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.google.gson.annotations.SerializedName;
 
 @Entity
-@Table(name="properties")
-public class Properties implements Serializable {
+@Table(name="property")
+public class Property implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column
 	private String title;
 	
 	@Column
+	@SerializedName(value="x", alternate={"long"})
 	private Integer x;
 	
 	@Column
+	@SerializedName(value="y", alternate={"lat"})
 	private Integer y;
 	
 	@Column
@@ -43,8 +46,8 @@ public class Properties implements Serializable {
 	@Column
 	private Integer baths;
 	
-	@Column
-	private String[] provinces;
+	@Transient
+	private List<String> provinces;
 	
 	@Column
 	private Integer squareMeters;
@@ -104,13 +107,12 @@ public class Properties implements Serializable {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public String[] getProvinces() {
+	public List<String> getProvinces() {
 		return provinces;
 	}
-	public void setProvinces(String[] provinces) {
+	public void setProvinces(List<String> provinces) {
 		this.provinces = provinces;
 	}
-	
 	
 	
 	

@@ -10,15 +10,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.desafio.spotippos.controller.PropertiesController;
 import br.com.desafio.spotippos.model.Boundaries;
 import br.com.desafio.spotippos.model.Point;
-import br.com.desafio.spotippos.model.Properties;
-import br.com.desafio.spotippos.model.PropertiesResponse;
+import br.com.desafio.spotippos.model.Property;
 import br.com.desafio.spotippos.model.Province;
-import br.com.desafio.spotippos.model.ProvincesResponse;
 import br.com.desafio.spotippos.repository.PropertiesRepository;
 import br.com.desafio.spotippos.service.PropertiesService;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={Properties.class, Province.class, Boundaries.class, Point.class,  
+@ComponentScan(basePackageClasses={Property.class, Province.class, Boundaries.class, Point.class,  
 		PropertiesController.class, PropertiesService.class, PropertiesRepository.class})
 public class AppWebConfiguration {
 

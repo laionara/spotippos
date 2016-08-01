@@ -1,13 +1,17 @@
 package br.com.desafio.spotippos.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import br.com.desafio.spotippos.model.Properties;
+import br.com.desafio.spotippos.model.Property;
 
 @Repository
 public class PropertiesRepository {
@@ -15,24 +19,31 @@ public class PropertiesRepository {
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public Properties save(Properties properties){
-		manager.persist(properties);
-		return properties;
+	@Transactional(readOnly = false)
+	public boolean save(Property property){
+		return manager.merge(property) != null;
 	}
 	
-	public Properties update(Properties properties){
+	public Property update(Property properties){
 		manager.merge(properties);
 		return properties;
 	}
 	
-	public Properties findById(Long id) {
+	public Property findById(Long id) {
 		try {
-			Query q = manager.createQuery("SELECT a FROM Properties a where a.id = :id");
+			Query q = manager.createQuery("SELECT p FROM " + Property.class.getName() + " p where p.id = :id");
 			q.setParameter("id", id);
-			Properties properties = (Properties) q.getSingleResult();
-			return properties;
+			Property property = (Property) q.getSingleResult();
+			return property;
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	public List<Property> findAll() {
+		List<Property> properties = new ArrayList<Property>();
+		Query q = manager.createQuery("SELECT p FROM " + Property.class.getName() + " p ");
+		properties= q.getResultList();
+		return properties;
 	}
 }

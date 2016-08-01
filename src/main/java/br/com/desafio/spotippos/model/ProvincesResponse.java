@@ -1,59 +1,72 @@
 package br.com.desafio.spotippos.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProvincesResponse {
 	
-	private Province Gode;
-	private Province Ruja;
-	private Province Jaby;
-	private Province Scavy;
-	private Province Groola;
-	private Province Nova;
+	@SerializedName(value="Gode")
+	private Province gode;
+	
+	@SerializedName(value="Ruja")
+	private Province ruja;
+	
+	@SerializedName(value="Jaby")
+	private Province jaby;
+	
+	@SerializedName(value="Scavy")
+	private Province scavy;
+	
+	@SerializedName(value="Groola")
+	private Province groola;
+	
+	@SerializedName(value="Nova")
+	private Province nova;
 	
 	public Province getGode() {
-		return Gode;
+		return gode;
 	}
 	
 	public void setGode(Province gode) {
-		Gode = gode;
+		this.gode = gode;
 	}
 	
 	public Province getRuja() {
-		return Ruja;
+		return ruja;
 	}
 	
 	public void setRuja(Province ruja) {
-		Ruja = ruja;
+		this.ruja = ruja;
 	}
 	
 	public Province getJaby() {
-		return Jaby;
+		return jaby;
 	}
 	
 	public void setJaby(Province jaby) {
-		Jaby = jaby;
+		this.jaby = jaby;
 	}
 	
 	public Province getScavy() {
-		return Scavy;
+		return scavy;
 	}
 	
 	public void setScavy(Province scavy) {
-		Scavy = scavy;
+		this.scavy = scavy;
 	}
 	
 	public Province getGroola() {
-		return Groola;
+		return groola;
 	}
 	
 	public void setGroola(Province groola) {
-		Groola = groola;
+		this.groola = groola;
 	}
 	
 	public Province getNova() {
-		return Nova;
+		return nova;
 	}
 	
 	public void setNova(Province nova) {
-		Nova = nova;
+		this.nova = nova;
 	}	
 }

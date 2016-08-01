@@ -4,15 +4,15 @@ import java.util.List;
 
 public class PropertiesResponse {
 
-	private List<Properties> properties;
+	private List<Property> properties;
 	
 	private Integer totalProperties;
 	
-	public List<Properties> getProperties() {
+	public List<Property> getProperties() {
 		return properties;
 	}
 
-	public void setPropertiesList(List<Properties> properties) {
+	public void setPropertiesList(List<Property> properties) {
 		this.properties = properties;
 	}
 
