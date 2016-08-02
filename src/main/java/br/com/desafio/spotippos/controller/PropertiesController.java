@@ -2,14 +2,16 @@ package br.com.desafio.spotippos.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,12 +37,11 @@ public class PropertiesController {
 	@RequestMapping(method = RequestMethod.POST, produces={"application/json; charset=UTF-8"})
 	public @ResponseBody Response include(@RequestBody Property property) {
 		Response response = new Response();
+		response.setSuccess(false);
 		
 		String errorMsg = validateProperty(property);
-		if(errorMsg != null) {
+		if(errorMsg != null)
 			response.setMessage(errorMsg);
-			response.setSuccess(false);
-		}
 		else if(this.propertiesService.save(property))
 			response.setSuccess(true);
 		return response;
@@ -51,8 +52,8 @@ public class PropertiesController {
 		return this.propertiesService.findById(id);
 	}
 	
-	@RequestMapping(value = "/{ax}/{ay}/{bx}/{by}", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
-	public @ResponseBody PropertiesResponse findByPoints(@PathVariable Integer ax, @PathVariable Integer ay, @PathVariable Integer bx, @PathVariable Integer by ) {
+	@RequestMapping(method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
+	public @ResponseBody PropertiesResponse findByPoints(@RequestParam(value="ax") Integer ax, @RequestParam(value="ay") Integer ay, @RequestParam(value="bx") Integer bx, @RequestParam(value="by") Integer by) {
 		PropertiesResponse propertiesResponse = new PropertiesResponse();
 		List<Property> properties = this.propertiesService.findByPoints(ax, ay, bx, by);
 		propertiesResponse.setPropertiesList(properties);
@@ -87,7 +88,7 @@ public class PropertiesController {
 	/**
 	 * Para preencher os properties 
 	 */
-	@InitBinder
+	@PostConstruct
 	@RequestMapping(value = "/init", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public @ResponseBody Response init(){
 		Response response = new Response();

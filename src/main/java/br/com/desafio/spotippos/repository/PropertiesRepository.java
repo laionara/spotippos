@@ -1,6 +1,5 @@
 package br.com.desafio.spotippos.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -40,11 +39,9 @@ public class PropertiesRepository {
 		}
 	}
 
-	public List<Property> findAll() {
-		List<Property> properties = new ArrayList<Property>();
-		Query q = manager.createQuery("SELECT p FROM " + Property.class.getName() + " p ");
-		properties= q.getResultList();
-		return properties;
+	public boolean checkIfIsEmpty() {
+		Query q = manager.createQuery("SELECT p FROM " + Property.class.getName() + " p limit 1");
+		return q.getResultList().isEmpty();
 	}
 
 	public List<Property> findByPoints(Integer ax, Integer ay, Integer bx, Integer by) {

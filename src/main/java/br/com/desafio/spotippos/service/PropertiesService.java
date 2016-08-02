@@ -64,30 +64,23 @@ public class PropertiesService {
 		Point ul = province.getBoundaries().getUpperLeft();
 		Point br = province.getBoundaries().getBottomRight();
 		
-		Rectangle rectangle = new Rectangle(ul.getX(), ul.getY(), 
-				Math.abs(br.getX() - ul.getX()), Math.abs(br.getY() - ul.getY()));
-	
+		Rectangle rectangle = new Rectangle(ul.getX(), br.getY(), 
+				br.getX() - ul.getX(), ul.getY() - br.getY());
+
 		return rectangle.contains(x, y);
 	}
 	
 	public boolean hasProperties(){
-		boolean isProperties = true;
-		List<Property> properties = this.propertiesDAO.findAll();
-		if(properties.isEmpty()){
-			isProperties = false;
-			return isProperties;
-		}
-		return isProperties;
+		return !this.propertiesDAO.checkIfIsEmpty();
 	}
 
 	public List<Property> findByPoints(Integer ax, Integer ay, Integer bx, Integer by) {
-		List<Property> propertiesWithProvince = new  ArrayList<Property>();
 		List<Property> properties = propertiesDAO.findByPoints(ax, ay, bx, by);
 		for(Property property: properties){
 			List<String> provinces = this.getOwnProvinces(property.getX(), property.getY());
 			property.setProvinces(provinces);
-			propertiesWithProvince.add(property);
 		}
-		return propertiesWithProvince;
+		return properties;
 	}
+	
 }
