@@ -52,6 +52,9 @@ public class PropertiesController {
 		return this.propertiesService.findById(id);
 	}
 	
+	/*
+	 * A partir do parametros de latitude e longitude são retornados os imóveis com suas respectivas provincias
+	 */
 	@RequestMapping(method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public @ResponseBody PropertiesResponse findByPoints(@RequestParam(value="ax") Integer ax, @RequestParam(value="ay") Integer ay, @RequestParam(value="bx") Integer bx, @RequestParam(value="by") Integer by) {
 		PropertiesResponse propertiesResponse = new PropertiesResponse();
@@ -62,6 +65,9 @@ public class PropertiesController {
 		
 	}
 	
+	/*
+	 * Valida os dados do imóvel antes de incluir no banco de dados
+	 */
 	private String validateProperty(Property property){
 		if(property.getX() < 0 || property.getX() > 1400)
 			return "X value not allowed";
@@ -85,8 +91,8 @@ public class PropertiesController {
 		return response.isSuccess();
 	}
 
-	/**
-	 * Para preencher os properties 
+	/*
+	 * Primeiro método a ser executado. Objetiva incluir no banco de dados os properties 
 	 */
 	@PostConstruct
 	@RequestMapping(value = "/init", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})

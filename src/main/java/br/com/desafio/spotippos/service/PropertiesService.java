@@ -21,6 +21,9 @@ public class PropertiesService {
 	@Autowired
 	private PropertiesRepository propertiesDAO;
 
+	/*
+	 * Consulta um imóvel a partir do id  
+	 */
 	public Property findById(Long id) {
 		Property property = propertiesDAO.findById(id);	
 		if(property != null) {
@@ -41,6 +44,9 @@ public class PropertiesService {
 		}
 	}
 	
+	/*
+	 * Obtem uma instância do objeto provincia e verifica em qual delas o imóvel está contido  
+	 */
 	private List<String> getOwnProvinces(int x, int y) {
 		List<String> provinceList = new ArrayList<String>();
 		
@@ -60,6 +66,10 @@ public class PropertiesService {
 		return provinceList;
 	}
 	
+	/*
+	 * Cria um retângulo de acordo com pontos superior esquerdo e inferior direito da provincia 
+	 * e verifica se o imóvel está contido nesta região.  
+	 */
 	private boolean verifyProvinceContainsPoint(Province province, int x, int y) {
 		Point ul = province.getBoundaries().getUpperLeft();
 		Point br = province.getBoundaries().getBottomRight();
@@ -74,6 +84,9 @@ public class PropertiesService {
 		return !this.propertiesDAO.checkIfIsEmpty();
 	}
 
+	/*
+	 * Identifica os imóveis contidos em determinada região e obtem a provincia referente
+	 */
 	public List<Property> findByPoints(Integer ax, Integer ay, Integer bx, Integer by) {
 		List<Property> properties = propertiesDAO.findByPoints(ax, ay, bx, by);
 		for(Property property: properties){
