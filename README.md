@@ -11,9 +11,9 @@ Ele foi desenvolvimento em Java versão 8, utilizando:
 
 Cada imóvel está contido em uma ou mais provincia, definida de acordo com os valores de latitude e longitude do imóvel. 
 A utilização da API é feita da seguinte maneira:
-1- Para a inclusão de um novo ímovel, é preciso enviá-lo via body por request do tipo Post spotippos/properties
-2- Um imóvel pode ser obtido via request Get spotippos/properties/{id}
-3- Os imóveis contidos em determinada provícia podem ser obtidos via request spotippos/properties?{integer}&ay={integer}&bx={integer}&by={integer}
+- 1- Para a inclusão de um novo ímovel, é preciso enviá-lo via body por request do tipo Post spotippos/properties
+- 2- Um imóvel pode ser obtido via request Get spotippos/properties/{id}
+- 3- Os imóveis contidos em determinada provícia podem ser obtidos via request spotippos/properties?{integer}&ay={integer}&bx={integer}&by={integer}
 
 
 
