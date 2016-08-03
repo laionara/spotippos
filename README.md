@@ -8,6 +8,7 @@ Ele foi desenvolvimento em Java versão 8, utilizando:
 - Banco de dados Postgres versão 9.4
 - Maven versão 4.0
 - Gson versão 2.7
+
 Cada imóvel está contido em uma ou mais provincia, definida de acordo com os valores de latitude e longitude do imóvel. 
 A utilização da API é feita da seguinte maneira:
 1- Para a inclusão de um novo ímovel, é preciso enviá-lo via body por request do tipo Post spotippos/properties
